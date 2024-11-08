@@ -8,3 +8,13 @@ OBJ = Adafruit_DHT.o
 
 Adafruit_DHT: $(OBJ)
 	gcc -o $@ $^ $(CFLAGS)
+	strip $@
+
+clean:
+	rm -f $(OBJ)
+
+realclean: clean
+	rm -f Adafruit_DHT
+
+test:
+	sudo ./Adafruit_DHT 22 4

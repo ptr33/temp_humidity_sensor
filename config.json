@@ -1,0 +1,14 @@
+{
+  "server": {
+    "hostname": "add mqtt hostname here",
+    "auth": {
+      "username": "add mqtt username",
+      "password": "add mqtt password"
+    }
+  },
+  "hardware_device": "22",
+  "hardware_gpio_pin" : "4",
+  "topic_temperature": "stat/room/temperature",
+  "topic_humidity": "stat/room/humidity",
+  "topic_dewpoint": "stat/schlafzimmer/dewpoint"
+}

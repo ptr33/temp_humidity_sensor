@@ -27,7 +27,10 @@
 
 #define MAXTIMINGS 100
 
-//#define DEBUG
+// difference in timing between low and high, CPU and compiler dependent
+#define LOW_HIGH_THRESHOLD 340
+
+// #define DEBUG
 
 #define DHT11 11
 #define DHT22 22
@@ -90,9 +93,18 @@ int readDHT(int type, int pin) {
   data[0] = data[1] = data[2] = data[3] = data[4] = 0;
 
   // wait for pin to drop?
+  counter = 0;
   while (bcm2835_gpio_lev(pin) == 1) {
     usleep(1);
+    counter++;
+    if (counter > MAXTIMINGS) {
+       printf("Device pin not high within timeout, still try to get data\n");
+       break;
+    }
   }
+#ifdef DEBUG
+  printf("Startup cycles %d\n", counter);
+#endif
 
   // read data!
   for (int i=0; i< MAXTIMINGS; i++) {
@@ -112,7 +124,7 @@ int readDHT(int type, int pin) {
     if ((i>3) && (i%2 == 0)) {
       // shove each bit into the storage bytes
       data[j/8] <<= 1;
-      if (counter > 200)
+      if (counter > LOW_HIGH_THRESHOLD)
         data[j/8] |= 1;
       j++;
     }

@@ -3,6 +3,8 @@ This project uses a DHT22 sensor connected to a Raspberry Pi Zero W to capture t
 
 The configuration of this MQTT client and topics should be set in [config.json](https://github.com/ptr33/temp_humidity_sensor/blob/main/config.json). A MQTT broker should already be running - example in https://mosquitto.org/
 
+![homeassistant view](img/homeassistant.png)
+
 
 ## References
 

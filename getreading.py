@@ -71,12 +71,27 @@ while i < NUMBER_OF_MEASUREMENTS:
 # now get median of list
 temp = sorted(temp_array)[NUMBER_OF_MEASUREMENTS // 2]
 humidity = sorted(humidity_array)[NUMBER_OF_MEASUREMENTS // 2]
+# check if we should apply an offset
+temp_offset = 0    # set defaults in case no offset was specified
+humidity_offset = 0
+try:
+    temp_offset = config['offset_temperature']
+    temp = temp - temp_offset
+    humidity_offset = config['offset_humidity']
+    humidity = humidity - humidity_offset
+except KeyError:
+    # no offset in config file presnt
+    pass
+# calculate dewpoint
 dewpoint = calc_dewpoint(temp, humidity)
 # round to 1/10's degrees
 dewpoint = int(dewpoint*10)/10
+temp = int(temp*10)/10
+# rount to natural number
+humidity = int(humidity)
 
 
-print(f'Selected {temp} C and {humidity} % dewpoint {dewpoint} C')
+print(f'Selected {temp} C (offset {temp_offset}) and {humidity} % (offset {humidity_offset}) dewpoint {dewpoint} C')
 
 # output to mqtt server
 # publish.single(config['topic_temperature'], 25.3, **config['server'])

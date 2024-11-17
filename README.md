@@ -1,7 +1,10 @@
 # Temperature and Humidty Sensor
 This project uses a DHT22 sensor connected to a Raspberry Pi Zero W to capture temperature and humidity measurements. The information is published over WLAN to a [MQTT](https://mqtt.org/) broker and displayed in [Homeassistant](https://www.home-assistant.io/).
 
-The configuration of this MQTT client and topics should be set in [config.json](https://github.com/ptr33/temp_humidity_sensor/blob/main/config.json). A MQTT broker should already be running - example in https://mosquitto.org/
+The configuration of this MQTT client and topics should be set in 
+[config.json](https://github.com/ptr33/temp_humidity_sensor/blob/main/config.json).
+An offset to compensate self-heating of the Raspberry Pi can be set with *offset_temperature* and *offset_humidity*.
+A MQTT broker should already be running - example in https://mosquitto.org/
 
 ![homeassistant view](img/homeassistant.png)
 

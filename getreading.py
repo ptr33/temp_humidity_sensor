@@ -97,7 +97,8 @@ print(f'Selected {temp} C (offset {temp_offset}) and {humidity} % (offset {humid
 # publish.single(config['topic_temperature'], 25.3, **config['server'])
 msgs  = [[config['topic_temperature'], temp],
          [config['topic_humidity'], humidity],
-         [config['topic_dewpoint'], dewpoint]]
+         [config['topic_dewpoint'], dewpoint],
+         [config['topic_heartbeat'], config['text_heartbeat']]]
 #         [config['topic_dewpoint'], f'{dewpoint}:0.1f']]
 publish.multiple(msgs, **config['server'])
 
